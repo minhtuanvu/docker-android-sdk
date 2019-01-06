@@ -8,6 +8,10 @@ ENV ANDROID_HOME /opt/android-sdk-linux
 ENV ANDROID_SDK /opt/android-sdk-linux
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV GRADLE_HOME /opt/gradle
+ENV GRADLE_VERSION 5.1
+ARG GRADLE_DOWNLOAD_SHA256=7506638a380092a0406364c79d6c87d03d23017fc25a5770379d1ce23c3fcd4d
+
 
 # Install required tools
 # Dependencies to execute Android builds
@@ -36,9 +40,7 @@ ENV LANG en_US.UTF-8
 
 RUN groupadd android && useradd -d /opt/android-sdk-linux -g android -u 1000 android
 
-ENV GRADLE_HOME /opt/gradle
-ENV GRADLE_VERSION 5.1
-ARG GRADLE_DOWNLOAD_SHA256=7506638a380092a0406364c79d6c87d03d23017fc25a5770379d1ce23c3fcd4d
+
 RUN set -o errexit -o nounset \
     && echo "Downloading Gradle" \
     && wget --no-verbose --output-document=gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
